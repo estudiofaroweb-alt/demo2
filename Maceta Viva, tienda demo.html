@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#0D2238">
+<meta name="robots" content="noindex">
+<title>Maceta Viva · Tienda de demostración</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230D2238'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23F5B82E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F7F8;--surface:#fff;--ink:#0D2238;--muted:#4C5E70;--line:#D8E0E6;--night:#0D2238;--lamp:#F5B82E;--lamp-ink:#1A1300;
+  --teal:#1F6F78;--leaf:#E3EEE6;--warn:#9A5B00;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08121D;--surface:#0F1E2D;--ink:#E6EEF5;--muted:#9FB2C3;--line:#1D3042;--night:#0F2236;--teal:#5CC2CC;--leaf:#143027;--warn:#F5B82E;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#08121D;--surface:#0F1E2D;--ink:#E6EEF5;--muted:#9FB2C3;--line:#1D3042;--night:#0F2236;--teal:#5CC2CC;--leaf:#143027;--warn:#F5B82E;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--night);z-index:25}
+h1,h2,h3{font-family:"Bricolage Grotesque",Figtree,system-ui,sans-serif;margin:0;line-height:1.1;letter-spacing:-.01em}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--lamp);outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.demo{background:var(--night);color:#B7C7D4;font-size:13px;text-align:center;padding:7px 14px;border-bottom:1px solid #1D3042}
+.demo i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--lamp);margin-right:8px;animation:pulse 2.2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,184,46,.5)}100%{box-shadow:0 0 0 10px rgba(245,184,46,0)}}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--night);color:#EAF2F8}
+.in{display:flex;align-items:center;justify-content:space-between;gap:8px;max-width:1080px;margin:0 auto;padding:14px 20px}
+.brand{font:800 1.3rem "Bricolage Grotesque",sans-serif;display:flex;align-items:center;gap:10px}
+.brand i{width:12px;height:12px;border-radius:50%;background:var(--lamp);box-shadow:0 0 0 4px rgba(245,184,46,.25)}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:10px 16px;cursor:pointer;font-weight:600;background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{box-shadow:inset 0 0 0 1.5px var(--lamp)}
+.btn:active{transform:scale(.97)}
+.top .btn{box-shadow:inset 0 0 0 1.5px #3A5670;color:#EAF2F8}
+.btn.main{background:var(--lamp);color:var(--lamp-ink);box-shadow:none}
+.btn.main:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,184,46,.35)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.main:disabled{background:var(--line);color:var(--muted);box-shadow:none}
+.bump{animation:bump .45s}
+@keyframes bump{40%{transform:scale(1.14)}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+@keyframes grow{from{width:0}}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.intro{background:var(--night);color:#EAF2F8;position:relative;overflow:hidden}
+.beam{position:absolute;inset:0;transform-origin:82% 0;pointer-events:none;background:conic-gradient(from 180deg at 82% 0%,transparent 0 6deg,rgba(245,184,46,.24) 20deg,transparent 40deg);animation:sweep 2.6s ease-out both}
+@keyframes sweep{from{opacity:0;transform:rotate(-16deg)}to{opacity:1;transform:none}}
+.intro .in{display:block;position:relative;padding:34px 20px 46px}
+.intro h1{font-size:clamp(2rem,7vw,3.3rem);font-weight:800;max-width:15ch;animation:up .7s .1s both}
+.intro p{color:#B7C7D4;max-width:52ch;margin:14px 0 0;animation:up .7s .25s both}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px 48px}
+.tools{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:22px}
+.tools input{max-width:320px}
+.note{color:var(--muted);font-size:14px}
+input,textarea{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;width:100%;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{border-color:var(--lamp);outline:none;box-shadow:0 0 0 3px rgba(245,184,46,.3)}
+td input{min-width:64px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:20px;animation:up .35s}
+.panel[hidden],.sheet[hidden]{display:none}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+td,th{padding:6px 4px;text-align:left;font-size:14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-top:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.card.enter{animation:up .6s both}
+.card:hover{transform:translateY(-4px);border-color:var(--lamp)}
+.pic{height:150px;display:grid;place-items:center;font-size:66px;background:var(--leaf)}
+.pic span{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.card:hover .pic span{transform:scale(1.08) rotate(-3deg)}
+.pic span.hit{transform:scale(1.3) rotate(8deg)}
+.body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.body h3{font-size:1.15rem;font-weight:800}
+.price{font:800 1.4rem "Bricolage Grotesque",sans-serif}
+.price small{font:400 .8rem Figtree,sans-serif;color:var(--muted)}
+.bar{height:5px;border-radius:9px;background:var(--line);overflow:hidden}
+.bar b{display:block;height:100%;border-radius:9px;background:var(--teal);transition:width .7s}
+.bar.low b{background:var(--lamp)}
+.enter .bar b{animation:grow .9s .3s both}
+.tag{font-size:.85rem;font-weight:600;color:var(--teal)}.tag.low{color:var(--warn)}.tag.out{color:var(--muted)}
+.stars{color:#D99A12;letter-spacing:1px}
+.linkb{background:none;border:0;padding:0;color:var(--muted);text-decoration:underline;cursor:pointer;text-align:left}
+.sheet{position:fixed;inset:0;background:rgba(5,12,20,.65);z-index:30;display:flex;align-items:flex-end;justify-content:center;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.sheet>div{background:var(--surface);border:1px solid var(--line);width:100%;max-width:560px;max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));animation:up .35s}
+.rev{border-top:1px solid var(--line);padding:10px 0}
+.qty{display:inline-flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:none;cursor:pointer}
+.qty button:hover{border-color:var(--lamp)}
+.starpick button{background:none;border:0;font-size:30px;cursor:pointer;color:#D99A12;padding:0 2px;transition:transform .15s}
+.starpick button:hover{transform:scale(1.2)}
+.done{text-align:center;display:grid;gap:12px;justify-items:center;padding:10px 0}
+.check{width:64px;height:64px;border-radius:50%;background:var(--lamp);color:var(--lamp-ink);display:grid;place-items:center;font-size:2rem;font-weight:800;animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+#toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translate(-50%,16px);background:var(--night);color:#fff;border:1px solid var(--lamp);padding:10px 18px;border-radius:99px;z-index:40;font-weight:600;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:92vw;text-align:center}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:var(--muted);font-size:.95rem;padding:26px 20px calc(34px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+footer a{color:var(--ink)}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="demo" role="note"><i></i>Tienda de demostración: los pedidos y pagos son simulados.</div>
+<header class="top">
+  <div class="in">
+    <div class="brand"><i></i>Maceta Viva</div>
+    <div class="row">
+      <button class="btn" id="adminBtn" aria-pressed="false">Panel del dueño</button>
+      <button class="btn main" id="cartBtn">Carrito (0)</button>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="beam" aria-hidden="true"></div>
+  <div class="in">
+    <div>
+      <h1>Plantas para cada rincón de tu casa.</h1>
+      <p>Así se ve una tienda hecha por Estudio Faro: el stock se actualiza solo, los clientes dejan reseñas y el dueño edita todo desde un panel. Pruébala.</p>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <section class="panel" id="admin" hidden>
+    <h2 style="font-size:1.4rem">Panel del dueño</h2>
+    <p class="note">Cambia nombre, precio y stock. El botón +10 repone inventario. Los cambios se guardan solo en este navegador.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Producto</th><th>Precio</th><th>Stock</th><th></th></tr></thead>
+      <tbody id="adminRows"></tbody>
+    </table></div>
+    <h3 style="font-size:1.1rem;margin-top:16px">Agregar producto</h3>
+    <div class="row" style="margin-top:8px">
+      <input id="nName" placeholder="Nombre" aria-label="Nombre del producto" style="flex:2;min-width:140px">
+      <input id="nPrice" type="number" min="0" placeholder="Precio" aria-label="Precio" style="flex:1;min-width:80px">
+      <input id="nStock" type="number" min="0" placeholder="Stock" aria-label="Stock" style="flex:1;min-width:80px">
+      <button class="btn main" id="addProd">Agregar producto</button>
+    </div>
+    <p style="margin:12px 0 0"><button class="btn" id="resetBtn">Restaurar datos de ejemplo</button></p>
+  </section>
+
+  <div class="tools">
+    <label class="sr" for="q">Buscar planta</label>
+    <input id="q" type="search" placeholder="Buscar planta" autocomplete="off">
+    <span class="note" id="count"></span>
+  </div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>Tienda de demostración hecha por Estudio Faro. ¿Quieres una igual para tu negocio? Escríbenos a <a href="mailto:estudiofaroweb@gmail.com">estudiofaroweb@gmail.com</a>.</footer>
+
+<div class="sheet" id="revSheet" role="dialog" aria-modal="true" aria-label="Reseñas" hidden><div id="revBody"></div></div>
+<div class="sheet" id="cartSheet" role="dialog" aria-modal="true" aria-label="Carrito" hidden><div id="cartBody"></div></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const KEY="maceta-demo-v1",MAXBAR=20;
+const SEED=()=>({products:[
+  {id:1,name:"Cactus mini",price:85,stock:12,emoji:"🌵"},
+  {id:2,name:"Helecho colgante",price:140,stock:3,emoji:"🌿"},
+  {id:3,name:"Monstera mediana",price:320,stock:0,emoji:"🪴"},
+  {id:4,name:"Set de 3 suculentas",price:180,stock:8,emoji:"🌱"}],
+  reviews:[
+  {pid:1,name:"Carla M.",stars:5,text:"Llegó bien empacado y quedó precioso en mi escritorio."},
+  {pid:1,name:"Luis A.",stars:4,text:"Más pequeño de lo que esperaba, pero muy bonito."},
+  {pid:2,name:"Ana P.",stars:5,text:"Colgado se ve enorme. Le encanta la humedad."},
+  {pid:3,name:"Diego R.",stars:5,text:"Se agota rápido, valió la pena esperar."}],nextId:5,cart:{}});
+let S,admin=false,revPid=null,pick=5,first=true,q="",tt;
+try{const r=localStorage.getItem(KEY);S=r?JSON.parse(r):SEED()}catch(e){S=SEED()}
+S.cart=S.cart||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=i=>document.getElementById(i);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const money=n=>"$"+Number(n).toLocaleString("es-MX");
+const stars=n=>"★".repeat(Math.round(n))+"☆".repeat(5-Math.round(n));
+const rating=pid=>{const r=S.reviews.filter(x=>x.pid===pid);return r.length?{avg:r.reduce((a,b)=>a+b.stars,0)/r.length,n:r.length}:null};
+const count=()=>Object.values(S.cart).reduce((a,b)=>a+b,0);
+function toast(t){const d=$("toast");d.textContent=t;d.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>d.classList.remove("on"),2000)}
+function openSheet(id){const s=$(id);s.hidden=false;const b=s.querySelector("button,input");if(b)b.focus()}
+function bump(){const c=$("cartBtn");c.classList.remove("bump");void c.offsetWidth;c.classList.add("bump")}
+function clamp(){for(const id in S.cart){const p=S.products.find(x=>x.id==id);if(!p||p.stock<=0)delete S.cart[id];else S.cart[id]=Math.min(S.cart[id],p.stock)}}
+
+function renderGrid(){
+  clamp();
+  const list=S.products.filter(p=>p.name.toLowerCase().includes(q));
+  $("count").textContent=list.length+(list.length===1?" producto":" productos");
+  $("grid").innerHTML=list.length?list.map((p,i)=>{
+    const r=rating(p.id),left=p.stock-(S.cart[p.id]||0);
+    const tag=p.stock<=0?'<span class="tag out">Agotado</span>':p.stock<=3?`<span class="tag low">Quedan ${p.stock}</span>`:`<span class="tag">En stock: ${p.stock}</span>`;
+    const btn=p.stock<=0?`<button class="btn" style="width:100%" data-notify="${p.id}">Avísame cuando llegue</button>`:`<button class="btn main" style="width:100%" data-add="${p.id}" ${left<=0?"disabled":""}>${left<=0?"Todo en tu carrito":"Agregar al carrito"}</button>`;
+    return `<article class="card${first?" enter":""}" data-id="${p.id}" ${first?`style="animation-delay:${i*110}ms"`:""}>
+    <div class="pic" aria-hidden="true"><span>${p.emoji||"📦"}</span></div>
+    <div class="body"><h3>${esc(p.name)}</h3>
+    <span class="price">${money(p.price)} <small>MXN</small></span>
+    <div class="bar ${p.stock<=3?"low":""}"><b style="width:${Math.min(100,p.stock/MAXBAR*100)}%"></b></div>${tag}
+    <button class="linkb" data-rev="${p.id}">${r?`<span class="stars">${stars(r.avg)}</span> ${r.n} reseña${r.n>1?"s":""}`:"Sé el primero en opinar"}</button>
+    <div style="margin-top:auto;padding-top:6px">${btn}</div></div></article>`}).join(""):'<p class="note">No encontramos esa planta. Prueba con otro nombre.</p>';
+  first=false;
+  $("cartBtn").textContent=`Carrito (${count()})`;
+}
+function renderAdmin(){
+  $("adminRows").innerHTML=S.products.map(p=>`<tr><td><input data-f="name" data-id="${p.id}" value="${esc(p.name)}" aria-label="Nombre"></td>
+  <td><input type="number" min="0" data-f="price" data-id="${p.id}" value="${p.price}" aria-label="Precio"></td>
+  <td><input type="number" min="0" data-f="stock" data-id="${p.id}" value="${p.stock}" aria-label="Stock"></td>
+  <td><div class="row"><button class="btn" data-restock="${p.id}">+10</button><button class="btn" data-del="${p.id}" aria-label="Eliminar ${esc(p.name)}">Eliminar</button></div></td></tr>`).join("");
+}
+function openReviews(pid){
+  revPid=pid;pick=5;
+  const p=S.products.find(x=>x.id===pid),list=S.reviews.filter(x=>x.pid===pid).reverse();
+  $("revBody").innerHTML=`<div class="row" style="justify-content:space-between"><h2 style="font-size:1.4rem">${esc(p.name)}</h2><button class="btn" data-close="revSheet">Cerrar</button></div>
+  ${list.length?list.map(r=>`<div class="rev"><span class="stars">${stars(r.stars)}</span> <strong>${esc(r.name)}</strong><br>${esc(r.text)}</div>`).join(""):'<p class="note">Aún no hay reseñas de este producto.</p>'}
+  <h3 style="font-size:1.1rem;margin-top:16px">Deja tu reseña</h3><div class="starpick" id="sp"></div>
+  <input id="rName" placeholder="Tu nombre" aria-label="Tu nombre" style="margin:6px 0"><textarea id="rText" rows="3" placeholder="¿Qué te pareció?" aria-label="Tu reseña"></textarea>
+  <p><button class="btn main" id="sendRev">Publicar reseña</button></p>`;
+  drawPick();openSheet("revSheet");
+}
+const drawPick=()=>{$("sp").innerHTML=[1,2,3,4,5].map(i=>`<button data-star="${i}" aria-label="${i} estrellas">${i<=pick?"★":"☆"}</button>`).join("")};
+const cartItems=()=>Object.entries(S.cart).filter(([,n])=>n>0).map(([id,n])=>({p:S.products.find(x=>x.id==id),n})).filter(x=>x.p);
+function cartHTML(){
+  const items=cartItems(),total=items.reduce((a,x)=>a+x.p.price*x.n,0);
+  return `<div class="row" style="justify-content:space-between"><h2 style="font-size:1.4rem">Tu carrito</h2><button class="btn" data-close="cartSheet">Cerrar</button></div>
+  ${items.length?items.map(x=>`<div class="rev row" style="justify-content:space-between"><span>${esc(x.p.name)}<br><span class="note">${money(x.p.price)} c/u</span></span>
+  <span class="qty"><button data-dec="${x.p.id}" aria-label="Quitar una unidad">−</button><b>${x.n}</b><button data-inc="${x.p.id}" aria-label="Agregar una unidad" ${x.n>=x.p.stock?"disabled":""}>+</button></span></div>`).join("")+
+  `<p class="price" style="margin:14px 0 4px">Total: ${money(total)} MXN</p><p class="note">Modo demo: no se cobra nada.</p><button class="btn main" style="width:100%" id="buy">Pagar (simulación)</button>`
+  :'<p class="note">Tu carrito está vacío. Agrega una planta para empezar.</p>'}`;
+}
+const refreshCart=()=>{save();renderGrid();$("cartBody").innerHTML=cartHTML()};
+document.addEventListener("click",e=>{
+  if(e.target.classList&&e.target.classList.contains("sheet")){e.target.hidden=true;return}
+  const t=e.target.closest("button");if(!t)return;
+  const d=t.dataset;
+  if(d.add){const id=+d.add,p=S.products.find(x=>x.id===id);if((S.cart[id]||0)<p.stock){S.cart[id]=(S.cart[id]||0)+1;save();renderGrid();bump();toast("Agregado al carrito");
+    const s=document.querySelector(`.card[data-id="${id}"] .pic span`);if(s){s.classList.add("hit");setTimeout(()=>s.classList.remove("hit"),450)}}}
+  else if(d.notify)toast("Listo, te avisaremos cuando llegue (simulado)");
+  else if(d.rev)openReviews(+d.rev);
+  else if(d.close)$(d.close).hidden=true;
+  else if(d.star){pick=+d.star;drawPick()}
+  else if(t.id==="sendRev"){const name=$("rName").value.trim(),text=$("rText").value.trim();if(!name||!text){toast("Escribe tu nombre y tu reseña");return}
+    S.reviews.push({pid:revPid,name,stars:pick,text});save();renderGrid();openReviews(revPid);toast("Reseña publicada")}
+  else if(t.id==="cartBtn"){$("cartBody").innerHTML=cartHTML();openSheet("cartSheet")}
+  else if(d.inc){const p=S.products.find(x=>x.id==d.inc);if(S.cart[d.inc]<p.stock){S.cart[d.inc]++;refreshCart()}}
+  else if(d.dec){if(--S.cart[d.dec]<=0)delete S.cart[d.dec];refreshCart()}
+  else if(t.id==="buy"){const items=cartItems(),total=items.reduce((a,x)=>a+x.p.price*x.n,0);
+    items.forEach(x=>x.p.stock=Math.max(0,x.p.stock-x.n));S.cart={};save();renderGrid();renderAdmin();
+    $("cartBody").innerHTML=`<div class="done"><div class="check">✓</div><h2>¡Pedido listo!</h2><p class="note">Pedido simulado MV-${1000+Math.floor(Math.random()*9000)} por ${money(total)} MXN. El stock ya se actualizó.</p><button class="btn main" data-close="cartSheet">Seguir comprando</button></div>`;
+    const b=$("cartBody").querySelector("button");if(b)b.focus()}
+  else if(t.id==="adminBtn"){admin=!admin;$("admin").hidden=!admin;t.setAttribute("aria-pressed",admin)}
+  else if(d.restock){S.products.find(x=>x.id==d.restock).stock+=10;save();renderGrid();renderAdmin();toast("Stock repuesto")}
+  else if(d.del){S.products=S.products.filter(x=>x.id!=d.del);delete S.cart[d.del];save();renderGrid();renderAdmin()}
+  else if(t.id==="addProd"){const name=$("nName").value.trim();if(!name){toast("Escribe el nombre del producto");return}
+    const em=["🌸","🌻","🍃","🌴","🪻"];S.products.push({id:S.nextId,name,price:+$("nPrice").value||0,stock:+$("nStock").value||0,emoji:em[S.nextId%5]});S.nextId++;
+    ["nName","nPrice","nStock"].forEach(i=>$(i).value="");save();renderGrid();renderAdmin();toast("Producto agregado")}
+  else if(t.id==="resetBtn"){S=SEED();save();renderGrid();renderAdmin();toast("Datos de ejemplo restaurados")}
+});
+document.addEventListener("change",e=>{
+  const f=e.target.dataset.f;if(!f)return;
+  const p=S.products.find(x=>x.id==e.target.dataset.id);
+  p[f]=f==="name"?e.target.value:Math.max(0,+e.target.value||0);save();renderGrid();
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".sheet").forEach(s=>s.hidden=true)});
+$("q").addEventListener("input",e=>{q=e.target.value.trim().toLowerCase();renderGrid()});
+renderGrid();renderAdmin();
+</script>
+</body>
+</html>
